@@ -1,12 +1,12 @@
-import routes from './router.js'
-import express from 'express'
-import mongoose from"mongoose"
-import session from 'express-session'
-import MongoStore from 'connect-mongo'
-import path from 'path'
-import { fileURLToPath } from 'url'
+const routes = require('./router.js')
+const express = require('express')
+const mongoose = require("mongoose")
+const path = require('path')
+const { fileURLToPath } = require('url')
 
 // Server config
+const app = express()
+const port = 3000
 
 // Connexion à la BDD MongoDB
 mongoose
@@ -16,19 +16,18 @@ mongoose
   }).then(startApp)
 
 
+app.set("view engine", "pug")
 
-
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
-
-
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.urlencoded({ extended: false }));
 
 // Routes
 app.use(routes)
 
+// Démarrage de l'application Node.js
 async function startApp() {
     console.log('Connexion à la base MongoDB initialisée')
 
     app.listen(port)
+    console.log(`http://localhost:${port}/home`)
 }

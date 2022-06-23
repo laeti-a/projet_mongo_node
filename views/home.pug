@@ -1,0 +1,22 @@
+extends layouts/frontend
+
+block content
+    div(style="text-align:center; position:relative; width:100%;background-color:darkgrey")
+        img(src="img/home_picture.jpg", alt="Person holding white plate with food", style="background-size:cover;")
+        div(style="position:absolute; top:38%; left:33%") 
+            h1(style="font-size:3em;color:white;background-color:black;opacity:.8;padding:2em;font-family:system-ui") Restaurants in New-York
+
+
+    div(style="padding:5em; display:flex;font-family:Courier;justify-content:center") 
+        img(src="img/restaurant_table.svg", alt="Restaurant table picture", style="width:30%")
+        div(style="width:30%;margin-left:8em;font-size:1.4em;text-align:center")
+            p Découvrez tous les restaurants de New-York avec cette application. <br/> Italien, Burger, Japonais... il y en a pour tous les goûts ! 
+            img(src="img/food.svg", alt="Food picture", style="width:70%;margin-top:2.5em")
+    footer 
+        div(style="padding:5em;background-color:brown;display:flex")
+            img(src="img/logo_red.png", alt="Logo website D.app", style="width:15%;margin-left:10em")
+            ul(style="list-style-type:none; font-family:Courier;font-size:1.4em;line-height:1.5em")
+                li <a href="/restos" style="color:orange;">Restaurants</a>
+                li <a href="/explore" style="color:orange;">Explore</a>
+                li <a href="/rating" style="color:orange;">Rate</a>
+                li <a href="/addRestaurant" style="color:orange;">Add Restaurant</a>

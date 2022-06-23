@@ -1,0 +1,34 @@
+extends layouts/frontend
+
+block content
+    div(style="text-align:center")
+        h1 Recherchez votre prochain restaurant
+    
+    div(style="margin:3em 0")
+    .ui.middle.aligned.center.aligned.grid
+        form.form(method="post", action="/")
+            div(style="display:flex")
+                div
+                    label(for="cuisine" style="font-size:1.2em") Choisissez le type de cuisine
+                    br
+                    br
+                    select(type='select', name='cuisine', 'Type de cuisine', style="width:45%")
+                        each cuisine in cuisines
+                            option=cuisine._id
+                div
+                    label(for="quartier" style="font-size:1.2em") Choisissez le quartier
+                    br
+                    br
+                    select(type='select', name='quartier', 'Quartier')
+                        each quartier in quartiers
+                            option=quartier._id
+            br
+            button(type="submit", style="width:60%;margin:0 auto").ui.fluid.black.large.submit.button Lancer la recherche
+    footer 
+        div(style="margin:15em 0;padding:5em;background-color:brown;display:flex")
+            img(src="img/logo_red.png", alt="Logo website D.app", style="width:15%;margin-left:10em")
+            ul(style="list-style-type:none; font-family:Courier;font-size:1.4em;line-height:1.5em")
+                li <a href="/restos" style="color:orange;">Restaurants</a>
+                li <a href="/explore" style="color:orange;">Explore</a>
+                li <a href="/rating" style="color:orange;">Rate</a>
+                li <a href="/addRestaurant" style="color:orange;">Add Restaurant</a>
