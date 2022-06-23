@@ -10,7 +10,7 @@ const page = {
         try{
             let restaurant = []
             
-            let recupRestau = await RestaurantsModel.find({},{_id:0, name:1, cuisine:1, 'address.building': 1,'address.street': 1,'address.zipcode': 1})
+            let recupRestau = await RestaurantsModel.find({},{_id:0, name:1, cuisine:1, borough:1, 'address.building': 1,'address.street': 1,'address.zipcode': 1})
 
             recupRestau.forEach(doc =>{
                 let name = doc.name

@@ -12,14 +12,14 @@ block content
                     label(for="cuisine" style="font-size:1.2em") Choisissez le type de cuisine
                     br
                     br
-                    select(type='select', name='cuisine', 'Type de cuisine', style="width:45%")
+                    select(type='select', name='cuisine', 'Type de cuisine', style="width:45%;border:1px solid #1b1c1d;background-color:#1b1c1d;color:white;padding:0.7em")
                         each cuisine in cuisines
                             option=cuisine._id
                 div
                     label(for="quartier" style="font-size:1.2em") Choisissez le quartier
                     br
                     br
-                    select(type='select', name='quartier', 'Quartier')
+                    select(type='select', name='quartier', 'Quartier', style="border:1px solid #1b1c1d;background-color:#1b1c1d;color:white;padding:0.7em")
                         each quartier in quartiers
                             option=quartier._id
             br

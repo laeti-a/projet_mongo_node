@@ -12,7 +12,7 @@ block content
         div(style="font-family:Courier;width:80%;margin-left:10em;margin-top:4em")
             if(restaurants != [])
             each restaurant in restaurants
-                img(src="img/building.svg", alt="Building picture", style="width:20%")
+                img(src="img/building.svg", alt="Building picture", style="width:20%;margin-top:6em")
                 h3=restaurant.name
                 
                 div(style='display:flex')
@@ -24,6 +24,9 @@ block content
                     p(style='margin-left:7px')=restaurant.address.street
                     p ,
                     p=restaurant.address.zipcode
+                div(style='display:flex')
+                    p(style='margin-right:7px;font-weight:bold') Quartier :
+                    p=restaurant.borough
             else 
                 h2 -- Il n'existe pas de résultats correspondant à votre recherche --
 
