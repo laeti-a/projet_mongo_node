@@ -2,7 +2,6 @@ const routes = require('./router.js')
 const express = require('express')
 const mongoose = require("mongoose")
 const path = require('path')
-const { fileURLToPath } = require('url')
 
 // Server config
 const app = express()
@@ -26,8 +25,9 @@ app.use(routes)
 
 // Démarrage de l'application Node.js
 async function startApp() {
+    
     console.log('Connexion à la base MongoDB initialisée')
 
     app.listen(port)
-    console.log(`http://localhost:${port}/home`)
+    console.log(`http://localhost:${port}`)
 }

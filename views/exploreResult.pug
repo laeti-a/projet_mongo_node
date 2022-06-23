@@ -1,0 +1,37 @@
+extends layouts/frontend
+
+block content
+    div
+        a(href="/explore" style="color:brown;border: 1px solid black;padding:5px;margin:30px 0 0 20px;background-color:lightgrey") Retour à la sélection
+
+    div(style="text-align:center")
+        h1 Résultat.s de votre recherche
+    
+    div(style="margin:3em 0")
+    .ui.middle.aligned.center.aligned.grid
+        div(style="font-family:Courier;width:80%;margin-left:10em;margin-top:4em")
+            if(restaurants != [])
+            each restaurant in restaurants
+                img(src="img/cooking.svg", alt="Cooking picture", style="width:20%")
+                h3=restaurant.name
+                
+                div(style='display:flex')
+                    p(style='margin-right:7px;font-weight:bold') Type de cuisine : 
+                    p=restaurant.cuisine
+                div(style='display:flex')
+                    p(style='margin-right:7px;font-weight:bold') Adresse du restaurant :
+                    p=restaurant.address.building 
+                    p(style='margin-left:7px')=restaurant.address.street
+                    p ,
+                    p=restaurant.address.zipcode
+            else 
+                h2 -- Il n'existe pas de résultats correspondant à votre recherche --
+
+    footer 
+        div(style="margin:15em 0;padding:5em;background-color:brown;display:flex")
+            img(src="img/logo_red.png", alt="Logo website D.app", style="width:15%;margin-left:10em")
+            ul(style="list-style-type:none; font-family:Courier;font-size:1.4em;line-height:1.5em")
+                li <a href="/restos" style="color:orange;">Restaurants</a>
+                li <a href="/explore" style="color:orange;">Explore</a>
+                li <a href="/rating" style="color:orange;">Rate</a>
+                li <a href="/addRestaurant" style="color:orange;">Add Restaurant</a>

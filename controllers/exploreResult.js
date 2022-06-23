@@ -2,21 +2,16 @@ const RestaurantsModel = require("../Models/Restaurant")
 
 const page = {
     exploreResult: async (req, res) => {
-        const typeCuisine = await RestaurantsModel.aggregate([
-            { $project: { cuisine: 1, } },
-            { $group: {
-                _id: '$cuisine'
-            } },
-        ]).sort({_id:1})
+        const { cuisine, quartier } = req.body
 
-        const choixQuartier = await RestaurantsModel.aggregate([
-            { $project: { borough: 1, } },
-            { $group: {
-                _id: '$borough'
-            } },
-        ]).sort({_id:1})
-
-        res.render("explore", {cuisines:typeCuisine, quartiers:choixQuartier})
+        try{
+            const restaurant = await RestaurantsModel.find({cuisine:cuisine, borough:quartier},{_id:0, name:1, cuisine:1, 'address.building': 1,'address.street': 1,'address.zipcode': 1})
+            
+            res.render("exploreResult", {restaurants:restaurant})
+        }
+        catch(err){
+            return res.status(400).render('home')
+        }
     }
 }
 

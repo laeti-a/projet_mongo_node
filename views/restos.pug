@@ -1,9 +1,22 @@
 extends layouts/frontend
 
 block content
+    div(style="text-align:center")
+        h1 Retrouvez votre restaurant via son nom
+    
+    div(style="margin:3em 0")
+    .ui.middle.aligned.center.aligned.grid
+        form.form(method="post", action="/restos")
+            div(style="text-align:center")
+                label(for="nameResto" style="font-size:1.2em") Veuillez rentrer le nom du restaurant que vous recherchez : 
+                br
+                input(type='text', name='nameResto', 'Name' , style="border:1px solid black")
+                br
+                br
+            button(type="submit", style="width:60%;margin:0 auto").ui.fluid.black.large.submit.button Lancer la recherche
     
     footer 
-        div(style="padding:5em;background-color:brown;display:flex")
+        div(style="margin:15em 0;padding:5em;background-color:brown;display:flex")
             img(src="img/logo_red.png", alt="Logo website D.app", style="width:15%;margin-left:10em")
             ul(style="list-style-type:none; font-family:Courier;font-size:1.4em;line-height:1.5em")
                 li <a href="/restos" style="color:orange;">Restaurants</a>
