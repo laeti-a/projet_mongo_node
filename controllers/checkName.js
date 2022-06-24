@@ -13,7 +13,7 @@ const page = {
             
             let results = restaurants.find(
                 { name: restoName },
-            ).project({ _id:0, name:1, cuisine:1, fullAddress: {$concat: ['$address.building',' ','$address.street', ', ', '$address.zipcode']} })
+            ).project({ _id:0, name:1, cuisine:1, borough:1, fullAddress: {$concat: ['$address.building',' ','$address.street', ', ', '$address.zipcode']} })
 
             let restaurant = await results.toArray()
 

@@ -19,7 +19,10 @@ block content
             if(oneResult)
                 form.form(method="post", action="/rateRestaurant")
                     p(style="font-family:Courier;font-size:1.2em") Vous allez noter le restaurant suivant :
-                    p(style="font-family:Courier;font-size:1.2em")=oneResult.name
+                    p(style="font-weight:bold;font-family:Courier;font-size:1.2em")=oneResult.name
+                    p(style="font-family:Courier;font-size:1.1em")=oneResult.fullAddress
+                    p(style="font-family:Courier;font-size:1.1em")=oneResult.borough
+                    input(type='hidden', name='nomResto', value=oneResult.name)
                     br
                     br
                     label(for="grade" style="font-size:1.2em;margin-right:5px") Grade (de A à D)
