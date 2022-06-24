@@ -9,6 +9,8 @@ const page5 = require('./controllers/formAddResto')
 const page6 = require('./controllers/exploreResult')
 const page7 = require('./controllers/restauResult')
 const page8 = require('./controllers/addedResto')
+const page9 = require('./controllers/checkName')
+const page10 = require('./controllers/rateRestaurant')
 
 // Router
 const router = (() => {
@@ -31,6 +33,10 @@ const router = (() => {
 	apiRouter.route('/restosResult').post(page7.restauResult)
 
 	apiRouter.route('/restoAdded').post(page8.addedResto)
+
+	apiRouter.route('/checkName').post(page9.checkName)
+
+	apiRouter.route('/rateRestaurant').post(page10.rateRestaurant)
 
 
 	return apiRouter

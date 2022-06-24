@@ -1,0 +1,43 @@
+extends layouts/frontend
+
+block content
+    .ui.middle.aligned.center.aligned.grid
+        .six.wide.column
+            h1 Noter un restaurant
+
+            if(!oneResult)
+                form.form(method="post", action="/checkName")
+                    label(for="nameresto" style="font-size:1.4em;font-weight:bold") Entrez le nom du restaurant que vous souhaitez noter
+                    br
+                    br
+                    input(type='text', name='nameresto', 'Name', style="border:1px solid black")
+                    br
+                    br
+                    br
+                    button(type="submit", style="width:40%;margin:0 auto").ui.fluid.black.large.submit.button Valider
+
+            if(oneResult)
+                form.form(method="post", action="/rateRestaurant")
+                    p(style="font-family:Courier;font-size:1.2em") Vous allez noter le restaurant suivant :
+                    p(style="font-family:Courier;font-size:1.2em")=oneResult.name
+                    br
+                    br
+                    label(for="grade" style="font-size:1.2em;margin-right:5px") Grade (de A à D)
+                    input(type='text', name='grade', 'Grade', style="border:1px solid black")
+                    br
+                    br
+                    label(for="score" style="font-size:1.2em;margin-right:5px") Note (de 0 à 20)
+                    input(type='text', name='score', 'Rue', style="border:1px solid black")
+                    br
+                    br
+                    br
+                    button(type="submit", style="width:40%;margin:0 auto").ui.fluid.black.large.submit.button Valider
+
+    footer 
+        div(style="margin:10em 0;padding:5em;background-color:brown;display:flex")
+            img(src="img/logo_red.png", alt="Logo website D.app", style="width:15%;margin-left:10em")
+            ul(style="list-style-type:none; font-family:Courier;font-size:1.4em;line-height:1.5em")
+                li <a href="/restos" style="color:orange;">Restaurants</a>
+                li <a href="/explore" style="color:orange;">Explore</a>
+                li <a href="/rating" style="color:orange;">Rate</a>
+                li <a href="/addRestaurant" style="color:orange;">Add Restaurant</a>
