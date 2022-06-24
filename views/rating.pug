@@ -5,7 +5,7 @@ block content
         .six.wide.column
             h1 Noter un restaurant
 
-            if(!oneResult)
+            if(!oneResult && !severalResults)
                 form.form(method="post", action="/checkName")
                     label(for="nameresto" style="font-size:1.4em;font-weight:bold") Entrez le nom du restaurant que vous souhaitez noter
                     br
@@ -16,13 +16,34 @@ block content
                     br
                     button(type="submit", style="width:40%;margin:0 auto").ui.fluid.black.large.submit.button Valider
 
-            if(oneResult)
+            if(oneResult && !severalResults)
                 form.form(method="post", action="/rateRestaurant")
                     p(style="font-family:Courier;font-size:1.2em") Vous allez noter le restaurant suivant :
                     p(style="font-weight:bold;font-family:Courier;font-size:1.2em")=oneResult.name
                     p(style="font-family:Courier;font-size:1.1em")=oneResult.fullAddress
                     p(style="font-family:Courier;font-size:1.1em")=oneResult.borough
                     input(type='hidden', name='nomResto', value=oneResult.name)
+                    br
+                    br
+                    label(for="grade" style="font-size:1.2em;margin-right:5px") Grade (de A à D)
+                    input(type='text', name='grade', 'Grade', style="border:1px solid black")
+                    br
+                    br
+                    label(for="score" style="font-size:1.2em;margin-right:5px") Note (de 0 à 20)
+                    input(type='text', name='score', 'Rue', style="border:1px solid black")
+                    br
+                    br
+                    br
+                    button(type="submit", style="width:40%;margin:0 auto").ui.fluid.black.large.submit.button Valider
+
+            if(severalResults && !oneResult)
+                form.form(method="post", action="/rateRestaurant")
+                    p(style="font-family:Courier;font-size:1.2em") Plusieurs restaurants comportant ce nom existent, veuillez sélectionner celui qui correpond :
+                    p(style="font-weight:bold;font-family:Courier;font-size:1.2em")=severalResults[0].name
+                    select(type='select', name='infoResto', 'Info Resto',style="width:35%;border:1px solid #1b1c1d;background-color:#1b1c1d;color:white;padding:0.5em")
+                        each resto in severalResults
+                            option=resto.info
+                    input(type='hidden', name='nomResto', value=severalResults[0].name)
                     br
                     br
                     label(for="grade" style="font-size:1.2em;margin-right:5px") Grade (de A à D)

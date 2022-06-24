@@ -13,19 +13,29 @@ const page = {
             
             let results = restaurants.find(
                 { name: restoName },
-            ).project({ _id:0, name:1, cuisine:1, borough:1, fullAddress: {$concat: ['$address.building',' ','$address.street', ', ', '$address.zipcode']} })
+            ).project({ _id:0, name:1, cuisine:1, borough:1, 'address.street':1, fullAddress: {$concat: ['$address.building',' ','$address.street', ', ', '$address.zipcode']} })
 
             let restaurant = await results.toArray()
 
             if(restaurant.length == 1){
                 res.render('rating', {oneResult:restaurant[0]})
             }
-            else{
-                console.log("plusieurs résultats à gérer")
+            else if(restaurant.length > 1){
+
+                let restos = []
+                
+                restaurant.forEach(doc => {
+                    let name = doc.name
+                    let address = doc.address.street
+                    let quartier = doc.borough
+
+                    let fullInfo = address + ", " + quartier
+
+                    restos.push({"name" : name, "info" : fullInfo})
+                })
+
+                res.render('rating', {severalResults:restos})
             }
-            // else if(restaurant.length > 1){
-            //     res.render('ifSeveralResults', {restaurants:restaurant})
-            // }
         }
         catch(err){
             return res.status(400).render('home')
