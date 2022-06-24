@@ -1,22 +1,38 @@
-const RestaurantsModel = require("../Models/Restaurant")
+const { MongoClient } = require("mongodb")
+const uri ="mongodb://localhost:27017"
+const client = new MongoClient(uri)
 
 const page = {
     explore: async (req, res) => {
-        const typeCuisine = await RestaurantsModel.aggregate([
-            { $project: { cuisine: 1, } },
-            { $group: {
-                _id: '$cuisine'
-            } },
-        ]).sort({_id:1})
 
-        const choixQuartier = await RestaurantsModel.aggregate([
-            { $project: { borough: 1, } },
-            { $group: {
-                _id: '$borough'
-            } },
-        ]).sort({_id:1})
+        try{
+            await client.connect();
+            const database = client.db('ny')
+            const restaurants = database.collection('restaurants')
+            
+            const recupCuisine = restaurants.aggregate([
+                { $project: { cuisine: 1 } },
+                { $group: {
+                    _id: '$cuisine'
+                } },
+            ]).sort({_id:1})
 
-        res.render("explore", {cuisines:typeCuisine, quartiers:choixQuartier})
+            let typeCuisine = await recupCuisine.toArray()
+
+            const recupQuartier = restaurants.aggregate([
+                { $project: { borough: 1 } },
+                { $group: {
+                    _id: '$borough'
+                } },
+            ]).sort({_id:1})
+
+            let choixQuartier = await recupQuartier.toArray()
+
+            res.render("explore", {cuisines:typeCuisine, quartiers:choixQuartier})
+        }
+        catch(err){
+            return res.status(400).render('home')
+        }
     }
 }
 

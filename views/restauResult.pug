@@ -2,7 +2,7 @@ extends layouts/frontend
 
 block content
     div
-        a(href="/restos" style="color:brown;border: 1px solid black;padding:5px;margin:30px 0 0 20px;background-color:lightgrey") Retour à la recherche
+        a(href="/restos" style="color:white;border: 1px solid #1b1c1d;padding:5px;margin:30px 0 0 20px;background-color:#1b1c1d") Retour à la recherche
 
     div(style="text-align:center")
         h1 Résultat.s de votre recherche
@@ -11,25 +11,21 @@ block content
     .ui.middle.aligned.center.aligned.grid
         div(style="font-family:Courier;width:80%;margin-left:10em;margin-top:4em")
             if(restaurants != [])
-            each restaurant in restaurants
-                img(src="img/building.svg", alt="Building picture", style="width:20%;margin-top:6em")
-                h3=restaurant.name
-                
-                div(style='display:flex')
-                    p(style='margin-right:7px;font-weight:bold') Type de cuisine : 
-                    p=restaurant.cuisine
-                div(style='display:flex')
-                    p(style='margin-right:7px;font-weight:bold') Adresse du restaurant :
-                    p=restaurant.address.building 
-                    p(style='margin-left:7px')=restaurant.address.street
-                    p ,
-                    p=restaurant.address.zipcode
-                div(style='display:flex')
-                    p(style='margin-right:7px;font-weight:bold') Quartier :
-                    p=restaurant.borough
+                each restaurant in restaurants
+                    div(style="border:3px dashed #1b1c1d;margin:5em;display:flex")
+                        div
+                            img(src="img/building.svg", alt="Building picture", style="width:30%;margin:2em 0 2em 10em")
+                        div(style="margin-top:2em")
+                            h2=restaurant.name
+                            p(style='font-weight:bold;font-size:1.2em') Type de cuisine : 
+                            p(style='font-size:1.2em')=restaurant.cuisine
+                            p(style='font-weight:bold;font-size:1.2em') Adresse du restaurant :
+                            p(style='font-size:1.2em')=restaurant.fullAddress
+                            p(style='font-weight:bold;font-size:1.2em') Quartier :
+                            p(style='font-size:1.2em')=restaurant.borough
             else 
                 h2 -- Il n'existe pas de résultats correspondant à votre recherche --
-
+            
     footer 
         div(style="margin:15em 0;padding:5em;background-color:brown;display:flex")
             img(src="img/logo_red.png", alt="Logo website D.app", style="width:15%;margin-left:10em")

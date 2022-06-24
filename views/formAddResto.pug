@@ -1,0 +1,59 @@
+extends layouts/frontend
+
+block content
+    .ui.middle.aligned.center.aligned.grid
+        .six.wide.column
+            h1 Ajouter un nouveau restaurant
+
+            if errorMessage
+                .ui.error.message!= errorMessage
+            
+            form.form(method="post", action="/addRestaurant")
+                label(for="nameresto" style="font-size:1.4em;font-weight:bold") Nom du restaurant
+                br
+                input(type='text', name='nameresto', 'Name', style="border:1px solid black")
+                br
+                br
+
+                label(style="font-size:1.4em;font-weight:bold") Adresse
+                br
+                label(for="building" style="font-size:1.2em;margin-right:5px") Batiment
+                input(type='text', name='building', 'Batiment', style="border:1px solid black")
+                br
+                br
+                label(for="street" style="font-size:1.2em;margin-right:5px") Rue
+                input(type='text', name='street', 'Rue', style="border:1px solid black")
+                br
+                br
+                label(for="zipcode" style="font-size:1.2em;margin-right:5px") Code Postal
+                input(type='text', name='zipcode', 'Code Postal', style="border:1px solid black")
+                br
+                br
+                br
+
+                label(for="borough" style="font-size:1.3em") Sélectionner le quartier
+                br
+                select(type='select', name='borough', 'Quartier',style="width:35%;border:1px solid #1b1c1d;background-color:#1b1c1d;color:white;padding:0.5em")
+                    each quartier in quartiers
+                        option=quartier._id
+                br
+                br
+
+                label(for="cuisine" style="font-size:1.3em") De quel type de cuisine s'agit-il ?
+                br
+                select(type='select', name='cuisine', 'Type de cuisine', style="width:35%;border:1px solid #1b1c1d;background-color:#1b1c1d;color:white;padding:0.5em")
+                    each cuisine in cuisines
+                        option=cuisine._id
+                br
+                br
+                br
+                button(type="submit", style="width:60%;margin:0 auto").ui.fluid.black.large.submit.button Ajouter le nouveau meuble
+
+    footer 
+        div(style="margin:10em 0;padding:5em;background-color:brown;display:flex")
+            img(src="img/logo_red.png", alt="Logo website D.app", style="width:15%;margin-left:10em")
+            ul(style="list-style-type:none; font-family:Courier;font-size:1.4em;line-height:1.5em")
+                li <a href="/restos" style="color:orange;">Restaurants</a>
+                li <a href="/explore" style="color:orange;">Explore</a>
+                li <a href="/rating" style="color:orange;">Rate</a>
+                li <a href="/addRestaurant" style="color:orange;">Add Restaurant</a>

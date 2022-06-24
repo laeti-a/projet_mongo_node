@@ -1,13 +1,24 @@
-const RestaurantsModel = require("../Models/Restaurant")
+const { MongoClient } = require("mongodb")
+const uri ="mongodb://localhost:27017"
+const client = new MongoClient(uri)
 
 const page = {
     exploreResult: async (req, res) => {
         const { cuisine, quartier } = req.body
 
         try{
-            const restaurant = await RestaurantsModel.find({cuisine:cuisine, borough:quartier},{_id:0, name:1, cuisine:1, 'address.building': 1,'address.street': 1,'address.zipcode': 1})
+            await client.connect();
+            const database = client.db('ny')
+            const restaurants = database.collection('restaurants')
             
-            res.render("exploreResult", {restaurants:restaurant})
+            let results = restaurants.aggregate([
+                {$match: {cuisine:cuisine, borough:quartier}},
+                {$project: {_id:0, name:1, cuisine:1, fullAddress: {$concat: ['$address.building',' ','$address.street', ', ', '$address.zipcode'] },}}
+            ])
+
+            let restaurant = await results.toArray()
+
+            res.render("exploreResult", {restaurants:restaurant, quartier:quartier, cuisine:cuisine})
         }
         catch(err){
             return res.status(400).render('home')
